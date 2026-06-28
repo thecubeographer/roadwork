@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0c0e11" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Roadwork" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230c0e11'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="icon.png" />
+<title>ROADWORK — Daily Discipline</title>
+<style>
+  :root{
+    --bg:#0c0e11; --panel:#15181d; --panel2:#1c2027; --line:#272c34;
+    --txt:#e9edf2; --muted:#8b93a0; --dim:#5b626d;
+    --ok:#2ecc71; --okdim:#1d6b3f; --fire:#ff7a18; --red:#ff4d4d; --reddim:#5a1f1f;
+    --gold:#f5c542;
+    --r:16px; --r2:12px;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--bg);color:var(--txt)}
+  body{
+    max-width:520px;margin:0 auto;padding:env(safe-area-inset-top) 16px calc(env(safe-area-inset-bottom) + 32px);
+    -webkit-font-smoothing:antialiased;
+  }
+  header{padding:22px 2px 14px}
+  h1{font-size:24px;font-weight:800;letter-spacing:.5px;margin:0;display:flex;align-items:center;gap:8px}
+  h1 small{font-size:11px;font-weight:600;color:var(--dim);letter-spacing:2px;text-transform:uppercase}
+  .date{color:var(--muted);font-size:13px;margin-top:4px;font-weight:600}
+
+  /* Coach verdict */
+  .coach{
+    background:linear-gradient(160deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-left:4px solid var(--muted);
+    border-radius:var(--r);padding:15px 16px;margin:6px 0 18px;line-height:1.5;
+  }
+  .coach.good{border-left-color:var(--ok)}
+  .coach.bad{border-left-color:var(--red)}
+  .coach .tag{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:6px}
+  .coach.good .tag{color:var(--ok)}
+  .coach.bad .tag{color:var(--red)}
+  .coach p{margin:0;font-size:14.5px;color:var(--txt)}
+  .coach p+p{margin-top:8px;color:var(--muted);font-size:13.5px}
+
+  /* habit cards */
+  .habit{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    padding:14px;margin-bottom:12px;display:flex;align-items:center;gap:14px;
+    cursor:pointer;user-select:none;transition:transform .08s ease,border-color .15s;
+  }
+  .habit:active{transform:scale(.99)}
+  .habit.done{border-color:var(--okdim);background:linear-gradient(120deg,rgba(46,204,113,.07),var(--panel))}
+  .habit.broken{border-color:var(--reddim)}
+  .box{
+    width:46px;height:46px;flex:0 0 46px;border-radius:13px;border:2px solid var(--line);
+    background:var(--panel2);display:flex;align-items:center;justify-content:center;font-size:22px;
+    transition:all .15s;
+  }
+  .habit.done .box{background:var(--ok);border-color:var(--ok)}
+  .habit.done .box .emoji{display:none}
+  .box .check{display:none;color:#06140b;font-size:26px;font-weight:900}
+  .habit.done .box .check{display:block}
+  .hmeta{flex:1;min-width:0}
+  .hname{font-size:16px;font-weight:700}
+  .hsub{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .streak{text-align:right;flex:0 0 auto}
+  .streak .big{font-size:20px;font-weight:800;line-height:1}
+  .streak .big.cold{color:var(--dim)}
+  .streak .big.hot{color:var(--fire)}
+  .streak .lbl{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
+  .streak .best{font-size:11px;color:var(--muted);margin-top:4px}
+
+  /* history grid */
+  details{margin-top:4px}
+  summary{list-style:none;cursor:pointer;color:var(--muted);font-size:13px;font-weight:600;padding:10px 2px;text-align:center}
+  summary::-webkit-details-marker{display:none}
+  .gridwrap{margin-top:6px}
+  .gridrow{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .gridrow .ge{font-size:18px;width:24px;text-align:center;flex:0 0 24px}
+  .cells{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;flex:1}
+  .cell{aspect-ratio:1;border-radius:4px;background:var(--panel2);border:1px solid var(--line);cursor:pointer}
+  .cell.on{background:var(--ok);border-color:var(--ok)}
+  .cell.today{outline:2px solid var(--gold);outline-offset:1px}
+  .gridhint{font-size:11px;color:var(--dim);text-align:center;margin-top:2px}
+
+  .actions{display:flex;gap:10px;margin-top:18px}
+  button.act{
+    flex:1;background:var(--panel2);color:var(--txt);border:1px solid var(--line);
+    border-radius:var(--r2);padding:14px;font-size:14px;font-weight:700;cursor:pointer
+  }
+  button.act:active{transform:scale(.98)}
+  button.primary{background:var(--gold);color:#241c00;border-color:var(--gold)}
+  .foot{text-align:center;color:var(--dim);font-size:11px;margin-top:20px;line-height:1.6}
+  .toast{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+    background:var(--gold);color:#241c00;padding:12px 20px;border-radius:30px;font-weight:700;font-size:14px;
+    opacity:0;pointer-events:none;transition:all .25s;z-index:50;box-shadow:0 8px 30px rgba(0,0,0,.5)
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔥 ROADWORK <small>no excuses</small></h1>
+  <div class="date" id="date"></div>
+</header>
+
+<div class="coach" id="coach"><span class="tag">Coach</span><p>Loading…</p></div>
+
+<div id="habits"></div>
+
+<details>
+  <summary>▾ Last 14 days — tap any square to fix a missed log</summary>
+  <div class="gridwrap" id="grid"></div>
+  <div class="gridhint">Gold outline = today. Green = done.</div>
+</details>
+
+<div class="actions">
+  <button class="act primary" id="copyBtn">📋 Copy for Coach</button>
+  <button class="act" id="resetBtn">Reset day</button>
+</div>
+
+<div class="foot">
+  Data stays on this phone. Add to Home Screen for an app icon + offline use.<br/>
+  Tap a row to mark it done. The Coach is watching.
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const HABITS = [
+  {id:"vitamins", emoji:"💊", name:"Vitamins", sub:"Take them with the car key"},
+  {id:"water",    emoji:"💧", name:"Water",    sub:"Drink at every stop"},
+  {id:"workout",  emoji:"🏋️", name:"Workout",  sub:"7 min before the shower"},
+  {id:"stretch",  emoji:"🧘", name:"Stretch",  sub:"5 min before bed"},
+];
+
+const KEY="roadwork.v1";
+const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const today = () => fmt(new Date());
+const addDays = (d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+
+function load(){ try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}} }
+function save(s){ localStorage.setItem(KEY, JSON.stringify(s)); }
+let state = load();
+HABITS.forEach(h=>{ if(!state[h.id]) state[h.id]={}; });
+
+function has(id,dstr){ return !!state[id][dstr]; }
+function toggle(id,dstr){ if(state[id][dstr]) delete state[id][dstr]; else state[id][dstr]=1; save(state); }
+
+function streak(id){
+  let s=0; let d=new Date();
+  if(!has(id,fmt(d))) d=addDays(d,-1);      // grace: today not logged yet
+  while(has(id,fmt(d))){ s++; d=addDays(d,-1); }
+  return s;
+}
+function best(id){
+  const days=Object.keys(state[id]).sort();
+  let b=0,run=0,prev=null;
+  for(const ds of days){
+    if(prev && fmt(addDays(new Date(prev),1))===ds) run++; else run=1;
+    if(run>b)b=run; prev=ds;
+  }
+  return b;
+}
+function total(id){ return Object.keys(state[id]).length; }
+function brokenYesterday(id){
+  // streak is 0 AND there's history => a chain was broken
+  return streak(id)===0 && total(id)>0 && !has(id,today());
+}
+function daysSinceLast(id){
+  const days=Object.keys(state[id]).sort();
+  if(!days.length) return Infinity;
+  const last=new Date(days[days.length-1]);
+  return Math.round((new Date(today())-new Date(fmt(last)))/86400000);
+}
+
+/* ---------- THE COACH (harsh) ---------- */
+const SCOLD = {
+  water:[
+    "You skipped water. Even 2% dehydration tanks your focus and reaction time — that's the wheel of a moving car. Headaches, fatigue, sludgy recovery. Drink. Now.",
+    "No water logged? Your kidneys, your joints, and your tired road-brain are all paying the bill. Dehydration is the cheapest way to feel terrible. Fix it."
+  ],
+  vitamins:[
+    "You bought the vitamins to NOT take them? A gap day is wasted money and a broken chain. Consistency is the entire point of supplementing — one-offs do nothing.",
+    "Missed your vitamins. The benefit is cumulative; skipping breaks the build-up you were paying for. Put the bottle on the dashboard so you can't dodge it."
+  ],
+  workout:[
+    "No workout. Detraining begins inside 72 hours — strength and conditioning start leaking away, and worse, the HABIT cracks. You don't need a gym. 20 squats and 10 push-ups beats zero. Do the minimum.",
+    "You skipped moving your body after sitting in a car for hours. That's the worst possible day to skip. Stiff hips, weak posture, lost momentum. The session is small — the streak is everything."
+  ],
+  stretch:[
+    "No stretch after a day in the driver's seat? Tight hip flexors and a locked low back compound fast — that's how road trips end in sciatica. Five minutes tonight. Non-negotiable.",
+    "You skipped stretching. Hours of driving shortens everything; skipping is how stiffness becomes pain. Floor, hips, hamstrings, 5 minutes. Earn your sleep."
+  ]
+};
+const PRAISE = [
+  "Clean sweep today. Don't get comfortable — a streak is just a number waiting to break.",
+  "All four done. That's the standard, not an achievement. Same thing tomorrow.",
+  "Full card. Good. Now protect the chain — momentum is the only thing that makes this easy."
+];
+
+function pick(arr,seed){ return arr[seed % arr.length]; }
+
+function renderCoach(){
+  const el=document.getElementById("coach");
+  const broken = HABITS.filter(h=>brokenYesterday(h.id));
+  const undoneToday = HABITS.filter(h=>!has(h.id,today()));
+  const seed = new Date().getDate();
+
+  if(broken.length){
+    // scold the worst broken chain (longest gap)
+    broken.sort((a,b)=>daysSinceLast(b.id)-daysSinceLast(a.id));
+    const w=broken.find(h=>h.id) ; const h=broken[0];
+    const gap=daysSinceLast(h.id);
+    el.className="coach bad";
+    el.innerHTML=`<span class="tag">⚠ Streak broken — ${h.name}</span>
+      <p>${pick(SCOLD[h.id],seed)}</p>
+      <p>${gap===1?"It's been 1 day.":"It's been "+gap+" days."} ${broken.length>1?("And you've let "+broken.length+" habits slip. Stack the misses and you're not on a routine — you're just driving."):"Rebuild the chain today. Day one, again."}</p>`;
+    return;
+  }
+  if(undoneToday.length===0){
+    el.className="coach good";
+    el.innerHTML=`<span class="tag">✓ Day complete</span><p>${pick(PRAISE,seed)}</p>`;
+    return;
+  }
+  // day in progress — push on what's left
+  const names=undoneToday.map(h=>h.name).join(", ");
+  el.className="coach";
+  el.innerHTML=`<span class="tag">Coach</span>
+    <p>Day's not done. Still owe me: <strong>${names}</strong>.</p>
+    <p>Don't end the day at "almost." Almost doesn't build anything.</p>`;
+}
+
+function renderHabits(){
+  const wrap=document.getElementById("habits"); wrap.innerHTML="";
+  HABITS.forEach(h=>{
+    const done=has(h.id,today());
+    const s=streak(h.id), bk=brokenYesterday(h.id);
+    const div=document.createElement("div");
+    div.className="habit"+(done?" done":"")+(bk?" broken":"");
+    div.innerHTML=`
+      <div class="box"><span class="emoji">${h.emoji}</span><span class="check">✓</span></div>
+      <div class="hmeta"><div class="hname">${h.name}</div><div class="hsub">${h.sub}</div></div>
+      <div class="streak">
+        <div class="big ${s>0?'hot':'cold'}">${s>0?'🔥'+s:'—'}</div>
+        <div class="lbl">day streak</div>
+        <div class="best">best ${best(h.id)}</div>
+      </div>`;
+    div.onclick=()=>{ toggle(h.id,today()); render(); };
+    wrap.appendChild(div);
+  });
+}
+
+function renderGrid(){
+  const g=document.getElementById("grid"); g.innerHTML="";
+  const N=14, start=addDays(new Date(),-(N-1));
+  HABITS.forEach(h=>{
+    const row=document.createElement("div"); row.className="gridrow";
+    let cells="";
+    for(let i=0;i<N;i++){
+      const ds=fmt(addDays(start,i));
+      const on=has(h.id,ds), isT=ds===today();
+      cells+=`<div class="cell${on?' on':''}${isT?' today':''}" data-id="${h.id}" data-d="${ds}"></div>`;
+    }
+    row.innerHTML=`<div class="ge">${h.emoji}</div><div class="cells">${cells}</div>`;
+    g.appendChild(row);
+  });
+  g.querySelectorAll(".cell").forEach(c=>{
+    c.onclick=()=>{ toggle(c.dataset.id,c.dataset.d); render(); };
+  });
+}
+
+function render(){
+  document.getElementById("date").textContent =
+    new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
+  renderCoach(); renderHabits(); renderGrid();
+}
+
+/* ---------- copy status for Claude ---------- */
+function statusText(){
+  const lines=["ROADWORK status — "+today(),""];
+  HABITS.forEach(h=>{
+    const last7=[];
+    for(let i=6;i>=0;i--) last7.push(has(h.id,fmt(addDays(new Date(),-i)))?"✓":"·");
+    lines.push(`${h.emoji} ${h.name}: ${has(h.id,today())?"DONE today":"NOT done today"} | streak ${streak(h.id)} (best ${best(h.id)}) | 7d ${last7.join("")} | total ${total(h.id)}`);
+  });
+  lines.push("","Coach: be brutal. Tell me what each miss is costing me.");
+  return lines.join("\n");
+}
+function toast(msg){
+  const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1800);
+}
+document.getElementById("copyBtn").onclick=async()=>{
+  const txt=statusText();
+  try{ await navigator.clipboard.writeText(txt); toast("Copied — paste it to Claude"); }
+  catch(e){
+    const ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta);
+    ta.select(); document.execCommand("copy"); ta.remove(); toast("Copied — paste it to Claude");
+  }
+};
+document.getElementById("resetBtn").onclick=()=>{
+  if(confirm("Clear today's check-ins for all habits?")){
+    HABITS.forEach(h=>{ if(state[h.id][today()]) delete state[h.id][today()]; });
+    save(state); render(); toast("Today reset");
+  }
+};
+
+render();
+window.addEventListener("focus",render);
+if("serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js").catch(()=>{}); }
+</script>
+</body>
+</html>
