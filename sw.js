@@ -1,5 +1,5 @@
 // Roadwork service worker — offline-first app shell, stale-while-revalidate.
-const CACHE = "roadwork-v3";
+const CACHE = "roadwork-v4";
 const ASSETS = ["./", "./index.html", "./manifest.json", "./icon.png", "./roadwork.ics"];
 
 self.addEventListener("install", e => {

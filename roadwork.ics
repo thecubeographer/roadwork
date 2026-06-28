@@ -7,85 +7,85 @@ X-WR-CALNAME:Roadwork — Daily Discipline
 BEGIN:VEVENT
 UID:rw-am-mo@roadwork
 DTSTAMP:20260628T000000Z
-DTSTART:20260629T070000
-DURATION:PT15M
+DTSTART:20260629T100000
+DURATION:PT20M
 RRULE:FREQ=WEEKLY;BYDAY=MO
-SUMMARY:Roadwork AM — PUSH day
-DESCRIPTION:PUSH DAY workout (5-10 min):\nPush-ups x12 / Pike push-ups x8 / Chair or bed tricep dips x12 — 3 rounds.\nDaily 4: vitamins (with the car key) / water ~80oz = 3 bottles\, one per stop / the workout / 5-min stretch tonight. Brutal-day floor: 20 squats + 10 push-ups (still counts). Log it: https://thecubeographer.github.io/roadwork/
+SUMMARY:Roadwork — PUSH day
+DESCRIPTION:PUSH workout (5-10 min):\nPush-ups x12 / Pike push-ups x8 / Chair or bed tricep dips x12 — 3 rounds.\nAlso: vitamins (with the car key) + water ~80oz = 3 bottles across the day. Brutal-day floor: 20 squats + 10 push-ups (still counts). Log it: https://thecubeographer.github.io/roadwork/
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:PT0M
-DESCRIPTION:Roadwork AM — PUSH day
+DESCRIPTION:Roadwork — PUSH day
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:rw-am-tu@roadwork
 DTSTAMP:20260628T000000Z
-DTSTART:20260630T070000
-DURATION:PT15M
+DTSTART:20260630T100000
+DURATION:PT20M
 RRULE:FREQ=WEEKLY;BYDAY=TU
-SUMMARY:Roadwork AM — PULL day
-DESCRIPTION:PULL DAY workout (5-10 min):\nDoorway iso-rows 3x20s (grip door frame\, lean back\, pull) / Towel rows x12 / Supermans x15 / Reverse snow-angels x12 — 3 rounds.\nDaily 4: vitamins (with the car key) / water ~80oz = 3 bottles\, one per stop / the workout / 5-min stretch tonight. Brutal-day floor: 20 squats + 10 push-ups (still counts). Log it: https://thecubeographer.github.io/roadwork/
+SUMMARY:Roadwork — PULL day
+DESCRIPTION:PULL workout (5-10 min):\nDoorway iso-rows 3x20s (grip the door frame\, lean back\, pull) / Towel rows x12 / Supermans x15 / Reverse snow-angels x12 — 3 rounds.\nAlso: vitamins (with the car key) + water ~80oz = 3 bottles across the day. Brutal-day floor: 20 squats + 10 push-ups (still counts). Log it: https://thecubeographer.github.io/roadwork/
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:PT0M
-DESCRIPTION:Roadwork AM — PULL day
+DESCRIPTION:Roadwork — PULL day
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:rw-am-we@roadwork
 DTSTAMP:20260628T000000Z
-DTSTART:20260701T070000
-DURATION:PT15M
+DTSTART:20260701T100000
+DURATION:PT20M
 RRULE:FREQ=WEEKLY;BYDAY=WE
-SUMMARY:Roadwork AM — ABS day
-DESCRIPTION:ABS DAY workout (5-10 min):\nPlank 40s / Bicycle crunches x20 / Leg raises x12 / Mountain climbers x30 — 3 rounds.\nDaily 4: vitamins (with the car key) / water ~80oz = 3 bottles\, one per stop / the workout / 5-min stretch tonight. Brutal-day floor: 20 squats + 10 push-ups (still counts). Log it: https://thecubeographer.github.io/roadwork/
+SUMMARY:Roadwork — ABS + LEGS day
+DESCRIPTION:ABS + LEGS workout (5-10 min):\nSquats x20 / Bicycle crunches x20 / Reverse lunges x10 per leg / Leg raises x12 / Glute bridges x20 / Plank 40s — 2-3 rounds.\nAlso: vitamins (with the car key) + water ~80oz = 3 bottles across the day. Brutal-day floor: 20 squats + 10 push-ups (still counts). Log it: https://thecubeographer.github.io/roadwork/
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:PT0M
-DESCRIPTION:Roadwork AM — ABS day
+DESCRIPTION:Roadwork — ABS + LEGS day
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:rw-am-th@roadwork
 DTSTAMP:20260628T000000Z
-DTSTART:20260702T070000
-DURATION:PT15M
+DTSTART:20260702T100000
+DURATION:PT20M
 RRULE:FREQ=WEEKLY;BYDAY=TH
-SUMMARY:Roadwork AM — LEGS day
-DESCRIPTION:LEGS DAY workout (5-10 min):\nSquats x20 / Reverse lunges x10 per leg / Glute bridges x20 / Calf raises x20 — 3 rounds.\nDaily 4: vitamins (with the car key) / water ~80oz = 3 bottles\, one per stop / the workout / 5-min stretch tonight. Brutal-day floor: 20 squats + 10 push-ups (still counts). Log it: https://thecubeographer.github.io/roadwork/
+SUMMARY:Roadwork — PUSH day
+DESCRIPTION:PUSH workout (5-10 min):\nIncline then decline push-ups x10 each / Diamond push-ups x8 / Pike push-ups x10 — 3 rounds.\nAlso: vitamins (with the car key) + water ~80oz = 3 bottles across the day. Brutal-day floor: 20 squats + 10 push-ups (still counts). Log it: https://thecubeographer.github.io/roadwork/
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:PT0M
-DESCRIPTION:Roadwork AM — LEGS day
+DESCRIPTION:Roadwork — PUSH day
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:rw-am-fr@roadwork
 DTSTAMP:20260628T000000Z
-DTSTART:20260703T070000
-DURATION:PT15M
+DTSTART:20260703T100000
+DURATION:PT20M
 RRULE:FREQ=WEEKLY;BYDAY=FR
-SUMMARY:Roadwork AM — PUSH+PULL day
-DESCRIPTION:PUSH+PULL DAY workout (5-10 min):\nPush-ups x12 / Doorway or towel rows x12 / Pike push-ups x8 / Supermans x15 — 3 rounds.\nDaily 4: vitamins (with the car key) / water ~80oz = 3 bottles\, one per stop / the workout / 5-min stretch tonight. Brutal-day floor: 20 squats + 10 push-ups (still counts). Log it: https://thecubeographer.github.io/roadwork/
+SUMMARY:Roadwork — PULL day
+DESCRIPTION:PULL workout (5-10 min):\nTowel or backpack rows x12 / Single-arm towel rows x10 per side / Supermans x15 / Prone Y-T-W raises x8 each — 3 rounds.\nAlso: vitamins (with the car key) + water ~80oz = 3 bottles across the day. Brutal-day floor: 20 squats + 10 push-ups (still counts). Log it: https://thecubeographer.github.io/roadwork/
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:PT0M
-DESCRIPTION:Roadwork AM — PUSH+PULL day
+DESCRIPTION:Roadwork — PULL day
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:rw-pm-stretch@roadwork
 DTSTAMP:20260628T000000Z
-DTSTART:20260629T204500
-DURATION:PT10M
-RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
-SUMMARY:Roadwork PM — stretch + log your 4
-DESCRIPTION:5-min IN-BED STRETCH: hips\, hip flexors\, low back\, hamstrings\, spinal twist — undo the driver's seat.\nThen log all 4 in the app and tap Copy for Coach. Did you finish your 3 bottles? https://thecubeographer.github.io/roadwork/
+DTSTART:20260629T213000
+DURATION:PT30M
+RRULE:FREQ=DAILY
+SUMMARY:Roadwork — nightly stretch + log
+DESCRIPTION:5-min IN-BED STRETCH: hips\, hip flexors\, low back\, hamstrings\, spinal twist — undo the day in the seat.\nThen log all 4 in the app + tap Copy for Coach. Did you finish your 3 bottles? https://thecubeographer.github.io/roadwork/
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:PT0M
-DESCRIPTION:Roadwork PM — stretch + log your 4
+DESCRIPTION:Roadwork — nightly stretch + log
 END:VALARM
 END:VEVENT
 END:VCALENDAR
